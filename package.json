@@ -1,7 +1,7 @@
 {
-  "name": "webpack-merge-and-include-globally",
-  "version": "2.0.11",
-  "description": "Merge multiple files (js,css..) into single file to include somewhere",
+  "name": "webpack-merge-and-include-globally-http",
+  "version": "1.0.0",
+  "description": "Merge multiple files (js,css..) or HTTP assets into single file to include somewhere",
   "scripts": {
     "test": "jest",
     "build": "webpack --inline --colors --progress --display-error-details --display-cached && cp example/index.html dist/index.html",
@@ -33,7 +33,9 @@
   },
   "dependencies": {
     "es6-promisify": "^6.0.0",
-    "glob": "^7.1.2"
+    "glob": "^7.1.2",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
   },
   "keywords": [
     "webpack",
@@ -46,11 +48,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markshapiro/webpack-merge-and-include-globally.git"
+    "url": "git+https://github.com/robwil/webpack-merge-and-include-globally.git"
   },
   "bugs": {
-    "url": "https://github.com/markshapiro/webpack-merge-and-include-globally/issues"
+    "url": "https://github.com/robwil/webpack-merge-and-include-globally/issues"
   },
-  "homepage": "https://github.com/markshapiro/webpack-merge-and-include-globally#readme",
+  "homepage": "https://github.com/robwil/webpack-merge-and-include-globally#readme",
   "licenses": []
 }

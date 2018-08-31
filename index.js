@@ -1,9 +1,21 @@
 const fs = require('fs');
 const glob = require('glob');
+const rp = require('request-promise-native');
 const { promisify } = require('es6-promisify');
 
-const readFile = promisify(fs.readFile);
-const listFiles = promisify(glob);
+const fetchFile = (path, encoding) => {
+  if (path.startsWith('http:')) {
+    return rp({ url: path, gzip: true });
+  }
+  return promisify(fs.readFile)(path, encoding);
+};
+
+const listFiles = (path, options) => {
+  if (path.startsWith('http:')) {
+    return path;
+  }
+  return promisify(glob)(path, options);
+};
 
 const consequently = async (promises, separator) => {
   let result = '';
@@ -39,7 +51,7 @@ class MergeIntoFile {
     const finalPromises = Object.keys(files).map(async (newFile) => {
       const listOfLists = await Promise.all(files[newFile].map(path => listFiles(path, null)));
       const flattenedList = Array.prototype.concat.apply([], listOfLists);
-      const filesContentPromises = flattenedList.map(path => readFile(path, encoding || 'utf-8'));
+      const filesContentPromises = flattenedList.map(path => fetchFile(path, encoding || 'utf-8'));
       let content = await (ordered ? consequently : parallely)(filesContentPromises, '\n');
       if (transform && transform[newFile]) {
         content = transform[newFile](content);

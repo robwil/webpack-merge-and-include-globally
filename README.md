@@ -1,3 +1,5 @@
+**NOTE:** This is forked from [markshapiro/webpack-merge-and-include-globally](https://github.com/markshapiro/webpack-merge-and-include-globally). It was forked in order to add HTTP fetching.
+
 # MERGE INTO SINGLE FILE PLUGIN FOR WEBPACK
 
 Webpack plugin to merge your source files together into single file, to be included in index.html, and achieving same effect as you would by including them all separately through `<script>` or `<link>`.
@@ -5,7 +7,7 @@ Webpack plugin to merge your source files together into single file, to be inclu
 ### Getting Started
 
 ```bash
-npm install --save-dev webpack-merge-and-include-globally
+npm install --save-dev webpack-merge-and-include-globally-http
 ```
 
 ### Usage
@@ -25,7 +27,7 @@ because your `node_modules` is not available in production.
 <br/>with this plugin you can achieve the desired effect this way:
 ``` javascript
 
-  const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally');
+  const MergeIntoSingleFilePlugin = require('webpack-merge-and-include-globally-http');
   
   module.exports = {
     ...
@@ -40,7 +42,9 @@ because your `node_modules` is not available in production.
                     'node_modules/moment/locale/cs.js',
                     'node_modules/moment/locale/de.js',
                     'node_modules/moment/locale/nl.js',
-                    'node_modules/toastr/build/toastr.min.js'
+                    'node_modules/toastr/build/toastr.min.js',
+                    // HTTP URLs are also supported:
+                    // 'http://code.jquery.com/jquery-3.3.1.min.js'
                 ],
                 "vendor.css": [
                     'node_modules/toastr/build/toastr.min.css'

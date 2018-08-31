@@ -5,20 +5,17 @@ const { promisify } = require('es6-promisify');
 
 const fetchFile = (path, encoding) => {
   if (path.startsWith('http:')) {
-    return rp({url: path, gzip: true});
-  } else {
-    return promisify(fs.readFile)(path, encoding);
+    return rp({ url: path, gzip: true });
   }
+  return promisify(fs.readFile)(path, encoding);
 };
 
-const readFile = promisify(fs.readFile);
 const listFiles = (path, options) => {
   if (path.startsWith('http:')) {
     return path;
-  } else {
-    return promisify(glob)(path, options);
   }
-}
+  return promisify(glob)(path, options);
+};
 
 const consequently = async (promises, separator) => {
   let result = '';
